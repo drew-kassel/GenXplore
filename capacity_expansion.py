@@ -67,6 +67,13 @@ def capacity_by_type():
                     )
                     == False
                 ]
+            for j in range(len(settings.EAST_regions)):
+                loc_cap = loc_cap[
+                    loc_cap["Resource"].str.contains(
+                        list(settings.EAST_regions.values())[j]
+                    )
+                    == False
+                ]
         elif settings.region == "WECC":
             for j in range(len(settings.ERCOT_regions)):
                 loc_cap = loc_cap[
@@ -75,6 +82,29 @@ def capacity_by_type():
                     )
                     == False
                 ]
+            for j in range(len(settings.EAST_regions)):
+                loc_cap = loc_cap[
+                    loc_cap["Resource"].str.contains(
+                        list(settings.EAST_regions.values())[j]
+                    )
+                    == False
+                ]
+        elif settings.region == "EAST":
+            for j in range(len(settings.ERCOT_regions)):
+                loc_cap = loc_cap[
+                    loc_cap["Resource"].str.contains(
+                        list(settings.ERCOT_regions.values())[j]
+                    )
+                    == False
+                ]
+            for j in range(len(settings.WECC_regions)):
+                loc_cap = loc_cap[
+                    loc_cap["Resource"].str.contains(
+                        list(settings.WECC_regions.values())[j]
+                    )
+                    == False
+                ]
+
         loc_cap["technology"] = loc_cap["technology"].replace(settings.tech_dict)
         keep_col = ["technology"]
         for j in range(len(years)):
@@ -195,6 +225,14 @@ def capacity_by_type_plotter(tot_cap):
             zorder=4,
         )
         bottom = list(np.add(bottom, bar))
+    plt.text(
+        -1,
+        round(bottom[0], 0),
+        str(int(round(bottom[0], 0))),
+        horizontalalignment="center",
+        verticalalignment="bottom",
+        fontsize=15,
+    )
 
     count = 0
     xticks = []
@@ -224,7 +262,7 @@ def capacity_by_type_plotter(tot_cap):
     plt.xticks(xticks, xlabels, fontsize=15, rotation="vertical")
     plt.yticks(fontsize=20)
     plt.xlim((-2 + (cushion * (len(years) - 1) * barWidth)), len(scenarios))
-    plt.ylim(0, 400)
+    # plt.ylim(0, 400)
     plt.grid(axis="y", linestyle="-", color="0.5", zorder=0)
     plt.legend(
         legend_elements,
@@ -507,14 +545,14 @@ def tot_capacity_plotter(tot_cap):
 
     count = 0
     xticks = []
-    xlabels = [
-        "No Connect",
-        "1.5GW Connect",
-        "3.0GW Connect",
-        "6.0GW Connect",
-        "Optimal Connect",
-    ]
-    # xlabels = ["No Connect", "1.5GW Connect", "Optimal Connect"]
+    # xlabels = [
+    #     "No Connect",
+    #     "1.5GW Connect",
+    #     "3.0GW Connect",
+    #     "6.0GW Connect",
+    #     "Optimal Connect",
+    # ]
+    xlabels = ["Base"]
     for r in range(len(br)):
         xticks.append(count + (barWidth / 2))
         count += 1

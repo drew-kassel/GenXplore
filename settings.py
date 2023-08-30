@@ -12,26 +12,19 @@ Webber Energy Group
 
 # Settings
 def init():
-    global root_dir, region, multi_stage, scenarios_dict, scenarios_bins, years_dict, model_year, hour1, hour2, technologies, tech_dict, tech_dict, tech_dict2, ERCOT_regions, ERCOT_lines, WECC_regions, WECC_lines, colors
+    global root_dir, region, multi_stage, scenarios_dict, scenarios_bins, years_dict, model_year, hour1, hour2, technologies, tech_dict, tech_dict, tech_dict2, ERCOT_regions, ERCOT_lines, EAST_regions, EAST_lines, WECC_regions, WECC_lines, colors
 
-    root_dir = "/Users/drew.kassel/Library/CloudStorage/Box-Box/META/Modeling/"
+    # root_dir = "/Users/drew.kassel/Library/CloudStorage/Box-Box/Modeling/GenX/ERCOT_WECC_Interconnect/Optimize_ERCOT_and_WECC/"
+    root_dir = (
+        "/Users/drew.kassel/Library/CloudStorage/Box-Box/Modeling/GenX/TEXAS_COUNTIES/"
+    )
 
-    region = "WECC"
+    region = "ALL"
 
     multi_stage = 1
 
-    scenarios_dict = {
-        "interconnect_2035_20zone_base_0.0gw": "0.0GW\n(base)",
-        "interconnect_2035_20zone_base_1.5gw": "1.5GW\n(base)",
-        "interconnect_2035_20zone_base_3.0gw": "3.0GW\n(base)",
-        "interconnect_2035_20zone_base_6.0gw": "6.0GW\n(base)",
-        "interconnect_2035_20zone_base_optimal": "Optimal\n(base)",
-        "interconnect_2035_20zone_ws_0.0gw": "0.0GW\n(ws)",
-        "interconnect_2035_20zone_ws_1.5gw": "1.5GW\n(ws)",
-        "interconnect_2035_20zone_ws_3.0gw": "3.0GW\n(ws)",
-        "interconnect_2035_20zone_ws_6.0gw": "6.0GW\n(ws)",
-        "interconnect_2035_20zone_ws_optimal": "Optimal\n(ws)",
-    }
+    # scenarios_dict = {"US_base_v2": "US (base)"}
+    scenarios_dict = {"TEXAS_COUNTIES_2050_16zone_BAU": "Texas Counties"}
 
     # scenarios_dict = {
     #     "interconnect_2035_20zone_base_0.0gw_restricted": "0.0GW (base)",
@@ -46,9 +39,12 @@ def init():
     #     "interconnect_2035_20zone_ws_optimal_restricted": "Optimal (ws)",
     # }
 
+    # scenarios_bins = {
+    #     "base": list(scenarios_dict)[0:5],
+    #     "ws": list(scenarios_dict)[5:11],
+    # }
     scenarios_bins = {
-        "base": list(scenarios_dict)[0:5],
-        "ws": list(scenarios_dict)[5:11],
+        "base": list(scenarios_dict)[0],
     }
 
     years_dict = {
@@ -56,9 +52,10 @@ def init():
         "EndCap_p1": "2022",
         "EndCap_p2": "2025",
         "EndCap_p3": "2030",
-        "EndCap_p4": "2035",
+        "EndCap_p4": "2040",
+        "EndCap_p5": "2050",
     }
-    model_year = {"Results_p4": "2035"}
+    model_year = {"Results_p5": "2050"}
     hour1 = 1032
     hour2 = 1152
 
@@ -90,7 +87,8 @@ def init():
         "Onshore Wind Turbine": "wind",
         "Other_peaker": "other",
         "Solar Photovoltaic": "solar",
-        "UtilityPV_Class1_Moderate_": "solar",
+        "UtilityPV_Class1_Moderate": "solar",
+        "LandbasedWind_Class3_Moderate": "wind",
     }
 
     tech_dict2 = {
@@ -125,12 +123,61 @@ def init():
         "Zone16": "9_sansaba",
     }
     ERCOT_lines = [
+        # "1",
+        # "2",
+        # "3",
+        # "4",
+        # "5",
+        # "6",
+        # "7",
+        # "8",
+        # "9",
+        # "10",
+        # "11",
+        # "12",
+        # "13",
+        # "14",
+        # "15",
+        # "16",
+        # "17",
+        # "18",
+        # "19",
+        # "20",
+        # "21",
+        # "22",
+        # "23",
+        # "24",
+        # "25",
+        # "26",
+        # "27",
+        # "32",
+    ]
+
+    EAST_regions = {
+        "Zone1": "18_newengland",
+        "Zone2": "19_newyork",
+        "Zone3": "20_pjm",
+        "Zone4": "21_miso",
+        "Zone5": "22_spp",
+        "Zone7": "24_southeast",
+        "Zone8": "25_florida",
+    }
+    EAST_lines = [
         "1",
         "2",
         "3",
         "4",
         "5",
         "6",
+    ]
+
+    WECC_regions = {
+        "Zone6": "23_caiso",
+        "Zone9": "26_southwest",
+        "Zone10": "27_northwest",
+        "Zone11": "28_rockymountains",
+    }
+    WECC_lines = [
         "7",
         "8",
         "9",
@@ -139,32 +186,6 @@ def init():
         "12",
         "13",
         "14",
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20",
-        "21",
-        "22",
-        "23",
-        "24",
-        "25",
-        "26",
-        "27",
-        # "32",
-    ]
-
-    WECC_regions = {
-        "Zone17": "17_southwest",
-        "Zone18": "18_camex",
-        "Zone19": "19_northwest",
-    }
-    WECC_lines = [
-        "28",
-        "29",
-        "30",
-        "31",
     ]
 
     colors = {

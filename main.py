@@ -61,12 +61,12 @@ capacity_by_type_plotter(tot_cap)
 #     tech = settings.technologies[i]
 #     spec_capacity_hbar_plotter(tech)
 
-# tot_energy = energy_consumed_by_type()
-# energy_consumed_by_type_per_scenario(tot_energy)
-# energy_consumed_by_type_plotter(tot_energy)
+tot_energy = energy_consumed_by_type()
+energy_consumed_by_type_per_scenario(tot_energy)
+energy_consumed_by_type_plotter(tot_energy)
 # dispatch_plot_builder()
 
-# capacity_by_line()
+capacity_by_line()
 
 # scenarios_list = list(settings.scenarios_dict)
 # scenarios = []
